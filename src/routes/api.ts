@@ -2,7 +2,7 @@ import { Router, Request, Response } from 'express';
 import { doubanService } from '../services/doubanService';
 import { searchEnabled } from '../middleware/auth';
 import { logger } from '../logger';
-import { GenerationRequest } from '../types';
+import { GenerationRequest, SearchResponse, MediaInfo } from '../types';
 
 const router = Router();
 
@@ -161,11 +161,11 @@ router.get('/', searchEnabled, async (req: Request, res: Response, next) => {
       // Log key response data (but avoid logging huge format strings)
       responseSummary: {
         success: result?.success,
-        title: result?.title,
-        rating: result?.rating,
-        dataCount: Array.isArray(result?.data) ? result.data.length : undefined,
-        hasFormat: !!result?.format,
-        formatLength: result?.format?.length,
+        title: (result as any)?.title,
+        rating: (result as any)?.rating,
+        dataCount: Array.isArray((result as SearchResponse)?.data) ? (result as SearchResponse).data.length : undefined,
+        hasFormat: !!(result as MediaInfo)?.format,
+        formatLength: (result as MediaInfo)?.format?.length,
       },
     }, `API response sent: ${requestType}, duration=${duration}ms`);
 

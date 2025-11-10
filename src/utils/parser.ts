@@ -1,4 +1,6 @@
-import { load, CheerioAPI } from 'cheerio';
+import { load } from 'cheerio';
+
+type CheerioAPI = ReturnType<typeof load>;
 import axios, { AxiosRequestConfig } from 'axios';
 import { logger } from '../logger';
 
