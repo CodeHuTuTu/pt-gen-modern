@@ -65,15 +65,22 @@ npm run start
 
 ## API 文档
 
+**注意：** API 接口与原始 pt-gen-cfworker 项目完全兼容。
+
 ### 搜索接口
 
 ```
-GET /api/search?search={keyword}&source={source}
+GET /?search={keyword}&source={source}
 ```
 
 **参数：**
 - `search`: 搜索关键词
 - `source`: 源站点 (douban, imdb, bangumi)
+
+**示例请求：**
+```bash
+curl "http://localhost:3000/?search=肖申克的救赎&source=douban"
+```
 
 **响应示例：**
 ```json
@@ -98,21 +105,31 @@ GET /api/search?search={keyword}&source={source}
 #### 方式一：使用 URL
 
 ```
-GET /api/info?url={resource_url}
+GET /?url={resource_url}
 ```
 
 **参数：**
 - `url`: 资源完整 URL (例如：豆瓣电影链接)
 
+**示例请求：**
+```bash
+curl "http://localhost:3000/?url=https://movie.douban.com/subject/1291546/"
+```
+
 #### 方式二：使用源和 ID
 
 ```
-GET /api/info?site={site}&sid={id}
+GET /?site={site}&sid={id}
 ```
 
 **参数：**
 - `site`: 源站点 (douban, imdb, bangumi)
 - `sid`: 资源 ID
+
+**示例请求：**
+```bash
+curl "http://localhost:3000/?site=douban&sid=1291546"
+```
 
 **响应示例：**
 ```json
@@ -135,10 +152,10 @@ GET /api/info?site={site}&sid={id}
 
 ```bash
 # 方式一：查询参数
-curl "http://localhost:3000/api/search?search=test&source=douban&apikey=your-key"
+curl "http://localhost:3000/?search=test&source=douban&apikey=your-key"
 
 # 方式二：HTTP 头
-curl -H "X-API-Key: your-key" "http://localhost:3000/api/search?search=test&source=douban"
+curl -H "X-API-Key: your-key" "http://localhost:3000/?search=test&source=douban"
 ```
 
 ### 禁用搜索

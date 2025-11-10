@@ -72,7 +72,7 @@ npm run dev
 #### 搜索示例
 
 ```bash
-curl "http://localhost:3000/api/search?search=肖申克的救赎&source=douban"
+curl "http://localhost:3000/?search=肖申克的救赎&source=douban"
 ```
 
 响应：
@@ -94,7 +94,7 @@ curl "http://localhost:3000/api/search?search=肖申克的救赎&source=douban"
 #### 生成信息示例
 
 ```bash
-curl "http://localhost:3000/api/info?site=douban&sid=1291546"
+curl "http://localhost:3000/?site=douban&sid=1291546"
 ```
 
 ## 第 3 步：生产构建
@@ -296,14 +296,14 @@ export const imdbService = new ImdbService();
 ```typescript
 import { imdbService } from '../services/imdbService';
 
-// 在 /api/search 中
+// 在搜索逻辑中
 switch (source) {
   case 'imdb':
     result = await imdbService.search(search as string);
     break;
 }
 
-// 在 /api/info 中
+// 在信息生成逻辑中
 switch (source) {
   case 'imdb':
     result = await imdbService.getInfo(id);
@@ -340,9 +340,9 @@ APIKEY=your-secret-key-here
 然后在请求中提供密钥：
 
 ```bash
-curl "http://localhost:3000/api/search?search=test&source=douban&apikey=your-secret-key-here"
+curl "http://localhost:3000/?search=test&source=douban&apikey=your-secret-key-here"
 # 或
-curl -H "X-API-Key: your-secret-key-here" "http://localhost:3000/api/search?search=test&source=douban"
+curl -H "X-API-Key: your-secret-key-here" "http://localhost:3000/?search=test&source=douban"
 ```
 
 ### Q: 如何禁用搜索功能？

@@ -66,10 +66,10 @@ GET /?search={keyword}&source={site}
 
 **现代版本：**
 ```
-GET /api/search?search={keyword}&source={site}
+GET /?search={keyword}&source={site}
 ```
 
-响应格式保持兼容。
+✅ **完全兼容** - API 端点与原版一致。
 
 #### 信息生成
 
@@ -80,8 +80,10 @@ GET /?url=https://movie.douban.com/subject/1291546/
 
 **现代版本：**
 ```
-GET /api/info?url=https://movie.douban.com/subject/1291546/
+GET /?url=https://movie.douban.com/subject/1291546/
 ```
+
+✅ **完全兼容** - API 端点与原版一致。
 
 **原始版本（方式2 - 直接参数）：**
 ```
@@ -90,8 +92,12 @@ GET /?site=douban&sid=1291546
 
 **现代版本：**
 ```
-GET /api/info?site=douban&sid=1291546
+GET /?site=douban&sid=1291546
 ```
+
+✅ **完全兼容** - API 端点与原版一致。
+
+响应格式保持完全兼容。
 
 ### 缓存策略
 

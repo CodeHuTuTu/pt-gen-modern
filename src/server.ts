@@ -24,8 +24,8 @@ app.use((req, express, next) => {
 // API key authentication
 app.use(apiKeyAuth);
 
-// Routes
-app.use('/api', apiRoutes);
+// Routes - API routes must come before web routes to match / endpoint
+app.use('/', apiRoutes);
 app.use('/', webRoutes);
 
 // Error handling middleware
