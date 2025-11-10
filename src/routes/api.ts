@@ -7,12 +7,33 @@ import { GenerationRequest, SearchResponse, MediaInfo } from '../types/index.js'
 const router = Router();
 
 // Unified endpoint matching pt-gen-cfworker API
-router.get('/', searchEnabled, async (req: Request, res: Response, next) => {
+router.get('/', async (req: Request, res: Response, next) => {
   const { search, source, site, sid, url } = req.query as any;
+
+  logger.debug({
+    action: 'ROUTE_CHECK',
+    hasSearch: !!search,
+    hasSource: !!source,
+    hasSite: !!site,
+    hasSid: !!sid,
+    hasUrl: !!url,
+    allParams: req.query
+  }, 'Checking API route parameters');
 
   // If no API parameters, pass to next handler (Web UI)
   if (!search && !source && !site && !sid && !url) {
+    logger.debug('No API parameters found, passing to Web UI');
     return next();
+  }
+
+  logger.info('API request detected, processing...');
+
+  // Apply search restriction only to search requests
+  if (search && process.env.DISABLE_SEARCH === 'true') {
+    return res.status(403).json({
+      success: false,
+      error: 'Search is disabled',
+    });
   }
 
   const startTime = Date.now();

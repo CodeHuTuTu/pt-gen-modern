@@ -13,7 +13,6 @@ const PORT = parseInt(process.env.PORT || '3000');
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static('src/public'));
 
 // Logging middleware
 app.use((req, express, next) => {
@@ -27,6 +26,9 @@ app.use(apiKeyAuth);
 // Routes - API routes must come before web routes to match / endpoint
 app.use('/', apiRoutes);
 app.use('/', webRoutes);
+
+// Static files served last, with index disabled to prevent conflicting with routes
+app.use(express.static('src/public', { index: false }));
 
 // Error handling middleware
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
