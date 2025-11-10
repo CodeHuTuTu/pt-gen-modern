@@ -5,8 +5,21 @@ let redisClient: RedisClientType | null = null;
 
 export async function initCache() {
   try {
+    // Check if Redis is explicitly disabled
+    const redisEnabled = process.env.REDIS_ENABLED !== 'false';
+
+    if (!redisEnabled) {
+      logger.info('Redis disabled, using in-memory cache');
+      return null;
+    }
+
     const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
-    redisClient = createClient({ url: redisUrl });
+    redisClient = createClient({
+      url: redisUrl,
+      socket: {
+        reconnectStrategy: false, // Disable auto-reconnect
+      }
+    });
 
     redisClient.on('error', (err) => {
       logger.error('Redis Client Error:', err);
@@ -17,6 +30,7 @@ export async function initCache() {
     return redisClient;
   } catch (error) {
     logger.warn('Redis cache initialization failed, using in-memory cache', error);
+    redisClient = null; // Clear the client on failure
     return null;
   }
 }

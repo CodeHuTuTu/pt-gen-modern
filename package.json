@@ -5,7 +5,7 @@
   "type": "module",
   "main": "dist/server.js",
   "scripts": {
-    "dev": "node --loader tsx src/server.ts",
+    "dev": "node --import tsx src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
     "preview": "npm run build && npm start",
