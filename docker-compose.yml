@@ -8,6 +8,8 @@ services:
     volumes:
       - redis-data:/data
     command: redis-server --appendonly yes
+    networks:
+      - pt-gen-network
 
   app:
     build: .
@@ -22,6 +24,12 @@ services:
       - redis
     volumes:
       - ./src:/app/src
+    networks:
+      - pt-gen-network
 
 volumes:
   redis-data:
+
+networks:
+  pt-gen-network:
+    driver: bridge
