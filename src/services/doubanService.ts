@@ -1,7 +1,7 @@
-import { BaseService } from './baseService';
-import { SearchResponse, MediaInfo } from '../types';
-import { createSearchResponse, createMediaResponse, formatBBCode } from '../utils/formatter';
-import { fetchAndParse, extractJson } from '../utils/parser';
+import { BaseService } from './baseService.js';
+import { SearchResponse, MediaInfo } from '../types/index.js';
+import { createSearchResponse, createMediaResponse, formatBBCode } from '../utils/formatter.js';
+import { fetchAndParse, extractJson } from '../utils/parser.js';
 import axios from 'axios';
 
 export class DoubanService extends BaseService {

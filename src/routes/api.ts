@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express';
-import { doubanService } from '../services/doubanService';
-import { searchEnabled } from '../middleware/auth';
-import { logger } from '../logger';
-import { GenerationRequest, SearchResponse, MediaInfo } from '../types';
+import { doubanService } from '../services/doubanService.js';
+import { searchEnabled } from '../middleware/auth.js';
+import { logger } from '../logger.js';
+import { GenerationRequest, SearchResponse, MediaInfo } from '../types/index.js';
 
 const router = Router();
 

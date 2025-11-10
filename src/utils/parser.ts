@@ -2,7 +2,7 @@ import { load } from 'cheerio';
 
 type CheerioAPI = ReturnType<typeof load>;
 import axios, { AxiosRequestConfig } from 'axios';
-import { logger } from '../logger';
+import { logger } from '../logger.js';
 
 const DEFAULT_HEADERS = {
   'User-Agent':

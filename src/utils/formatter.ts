@@ -1,5 +1,5 @@
 import html2bbcode from 'html2bbcode';
-import { MediaInfo, SearchResponse } from '../types';
+import { MediaInfo, SearchResponse } from '../types/index.js';
 
 export function createSearchResponse(
   data: any[],

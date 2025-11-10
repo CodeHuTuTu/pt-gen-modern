@@ -1,6 +1,6 @@
-import { SearchResponse, MediaInfo } from '../types';
-import { logger } from '../logger';
-import { getCache, setCache } from '../utils/cache';
+import { SearchResponse, MediaInfo } from '../types/index.js';
+import { logger } from '../logger.js';
+import { getCache, setCache } from '../utils/cache.js';
 
 export abstract class BaseService {
   protected name: string;

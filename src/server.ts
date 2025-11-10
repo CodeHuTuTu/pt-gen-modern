@@ -1,11 +1,11 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
-import { logger } from './logger';
-import { initCache, closeCache } from './utils/cache';
-import { apiKeyAuth } from './middleware/auth';
-import apiRoutes from './routes/api';
-import webRoutes from './routes/web';
+import { logger } from './logger.js';
+import { initCache, closeCache } from './utils/cache.js';
+import { apiKeyAuth } from './middleware/auth.js';
+import apiRoutes from './routes/api.js';
+import webRoutes from './routes/web.js';
 
 const app = express();
 const PORT = parseInt(process.env.PORT || '3000');
