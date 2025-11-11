@@ -44,7 +44,10 @@ export function extractJson<T>(html: string, selector: string = 'script[type="ap
     const $ = parseHtml(html);
     const jsonString = $(selector).first().html();
     if (jsonString) {
-      return JSON.parse(jsonString);
+      // Remove control characters that can break JSON parsing
+      // This handles cases where the JSON-LD contains invalid control characters
+      const cleanedJsonString = jsonString.replace(/[\u0000-\u001F\u007F-\u009F]/g, '');
+      return JSON.parse(cleanedJsonString);
     }
   } catch (error) {
     logger.debug('Failed to extract JSON:', { selector, error });
